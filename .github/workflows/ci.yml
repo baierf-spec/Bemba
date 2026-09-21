@@ -1,0 +1,39 @@
+name: Validate Bemba
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  scaffold:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - name: Live Next server smoke
+        run: |
+          npm run start -- --hostname 127.0.0.1 > /tmp/bemba-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          for attempt in {1..30}; do
+            if curl -fsS http://127.0.0.1:3000/api/health > /dev/null; then break; fi
+            sleep 1
+          done
+          npm run test:smoke
+      - run: npm run build:worker
+      - name: Local Workers smoke
+        run: |
+          npm run preview:worker > /tmp/bemba-worker.log 2>&1 &
+          worker_pid=$!
+          trap 'kill "$worker_pid"' EXIT
+          for attempt in {1..30}; do
+            if curl -fsS http://127.0.0.1:8787/api/health > /dev/null; then break; fi
+            sleep 1
+          done
+          SMOKE_URL=http://127.0.0.1:8787 npm run test:smoke

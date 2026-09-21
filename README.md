@@ -2,7 +2,7 @@
 
 Seller storefront SaaS and product discovery for Zambia. Buyers contact sellers on WhatsApp; Bemba does not process their purchases.
 
-**Delivery status: M2 database/authentication code implemented; hosted Supabase and GitHub connection remain pending.** See [M2 handoff and test report](docs/08-m2-handoff.md). PostgreSQL/RLS tests pass; real Supabase registration and storage HTTP tests have not yet run. Seller catalog, marketplace, moderation workflows and AI remain later milestones.
+**Delivery status: M2 database/authentication code implemented; source is hosted at [baierf-spec/Bemba](https://github.com/baierf-spec/Bemba); hosted Supabase verification remains pending.** See [M2 handoff and test report](docs/08-m2-handoff.md). PostgreSQL/RLS tests pass; real Supabase registration and storage HTTP tests have not yet run. Seller catalog, marketplace, moderation workflows and AI remain later milestones.
 
 ## Start
 

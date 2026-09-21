@@ -1,0 +1,2 @@
+-- Local reset seed intentionally empty. Taxonomy is versioned in migrations.
+-- Disposable test users are created only by scripts/supabase-integration.mjs.

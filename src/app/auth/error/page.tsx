@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function Page() { return <main id="main" className="mx-auto min-h-[60vh] max-w-xl px-5 py-14"><h1 className="font-display text-3xl">We couldn’t complete your request</h1><p className="my-6">Your link may have expired, or the account service may be temporarily unavailable. Please try signing in again.</p><Link href="/auth/login" className="underline">Back to sign in</Link></main>; }
