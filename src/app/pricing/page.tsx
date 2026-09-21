@@ -1,16 +1,47 @@
 import type { Metadata } from "next";
-import { Card } from "@/components/ui/card";
-
-export const metadata: Metadata = { title: "Seller plans", alternates: { canonical: "/pricing" } };
-
+import { PlanCards, Benefits } from "@/components/bemba/shared";
+export const metadata: Metadata = {
+  title: "Seller plans",
+  alternates: { canonical: "/pricing" },
+};
 export default function Pricing() {
   return (
-    <main id="main" className="mx-auto min-h-[65vh] max-w-4xl px-5 py-16 sm:px-8">
-      <p className="text-xs font-bold tracking-widest text-primary uppercase">For sellers</p>
-      <h1 className="mt-4 font-display text-4xl sm:text-6xl">A storefront for your business.</h1>
-      <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">Bemba will offer seller subscriptions and optional product promotions. Plan prices and limits will be published before paid plans become available.</p>
-      <Card className="mt-8"><h2 className="text-xl font-semibold">Payments stay between you and your customer.</h2><p className="mt-3 leading-7 text-muted-foreground">Bemba helps customers discover your products and contact you on WhatsApp. You arrange product payment, pickup or delivery directly with them.</p></Card>
-      <p className="mt-6 text-sm text-muted-foreground">Paid subscriptions and promotions are not available yet.</p>
+    <main id="main" className="page-container pricing-page">
+      <div className="center-heading">
+        <p className="eyebrow">SMALL BUSINESS. BIG POSSIBILITIES.</p>
+        <h1>A plan for your next chapter.</h1>
+        <p>
+          Build your storefront. Share what you make. Grow at your own pace.
+        </p>
+      </div>
+      <PlanCards />
+      <p className="pricing-note">
+        Paid subscriptions and promotions are not available yet. Final prices
+        and limits will be published before launch.
+      </p>
+      <Benefits />
+      <section className="faq">
+        <h2>A few things worth knowing.</h2>
+        {[
+          [
+            "Does Bemba process product payments?",
+            "No. Customers contact you through WhatsApp. You arrange payment, pickup and delivery directly with them.",
+          ],
+          [
+            "Can I explore the platform first?",
+            "Yes. Our design preview lets you explore sample products, storefronts and the seller workspace. Preview changes are not saved.",
+          ],
+          [
+            "When will paid plans be available?",
+            "We will publish the confirmed prices and feature limits before enabling subscriptions. No payment is collected from these pages.",
+          ],
+        ].map(([q, a]) => (
+          <details key={q}>
+            <summary>{q}</summary>
+            <p>{a}</p>
+          </details>
+        ))}
+      </section>
     </main>
   );
 }

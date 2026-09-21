@@ -26,6 +26,7 @@ jobs:
             sleep 1
           done
           npm run test:smoke
+          npm run test:design
       - run: npm run build:worker
       - name: Local Workers smoke
         run: |

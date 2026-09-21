@@ -4,6 +4,9 @@ Seller storefront SaaS and product discovery for Zambia. Buyers contact sellers 
 
 **Delivery status: M2 database/authentication code implemented; source is hosted at [baierf-spec/Bemba](https://github.com/baierf-spec/Bemba); hosted Supabase verification remains pending.** See [M2 handoff and test report](docs/08-m2-handoff.md). PostgreSQL/RLS tests pass; real Supabase registration and storage HTTP tests have not yet run. Seller catalog, marketplace, moderation workflows and AI remain later milestones.
 
+**Design update:** the supplied 17 mockups now have mapped screen implementations, generated/local image assets and a clearly separated interactive design preview. Start at `/`, `/demo/marketplace`, `/demo/dashboard` or `/demo/onboarding/1`. See [reference mapping and verification](docs/09-design-reference-implementation.md) and [image provenance](docs/10-image-assets.md). Demo forms do not write to real seller accounts.
+
+
 ## Start
 
 Node 24 required (native TypeScript support is used by the test runner).
