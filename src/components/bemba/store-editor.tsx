@@ -87,6 +87,7 @@ export function StoreEditor({
           ].map(([t, s], i) => (
             <button
               key={t}
+              type="button"
               onClick={() => {
                 setStep(i + 1);
                 setNotice("");

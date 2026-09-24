@@ -4,8 +4,11 @@ import { credentials, profileName } from "@/lib/auth/validation";
 import { site } from "@/lib/site";
 
 export async function POST(request: Request) {
-  const go = (path: string) => NextResponse.redirect(new URL(path, site.url), { status: 303, headers: { "Cache-Control": "private, no-store" } });
-  if (request.headers.get("origin") !== site.url.origin) return new Response("Forbidden", { status: 403 });
+  const requestBase = new URL(request.url);
+  const allowedOrigin = site.url.origin;
+  const origin = request.headers.get("origin");
+  if (origin && origin !== allowedOrigin && origin !== requestBase.origin) return new Response("Forbidden", { status: 403 });
+  const go = (path: string) => NextResponse.redirect(new URL(path, request.url), { status: 303, headers: { "Cache-Control": "private, no-store" } });
   if (Number(request.headers.get("content-length") || 0) > 8192) return new Response("Payload too large", { status: 413 });
   try {
     const form = await request.formData();
@@ -14,7 +17,7 @@ export async function POST(request: Request) {
     if (intent === "register") {
       const input = credentials(form);
       const display_name = profileName(form.get("display_name"));
-      const { error } = await supabase.auth.signUp({ ...input, options: { data: { display_name }, emailRedirectTo: new URL("/auth/confirm", site.url).href } });
+      const { error } = await supabase.auth.signUp({ ...input, options: { data: { display_name }, emailRedirectTo: new URL("/auth/confirm", request.url).href } });
       if (error) return go("/auth/register?error=signup_failed");
       return go("/auth/check-email");
     }
@@ -29,7 +32,7 @@ export async function POST(request: Request) {
     if (intent === "recover") {
       const email = String(form.get("email") ?? "").trim();
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length>254) return go("/auth/forgot-password?error=invalid_input");
-      const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: new URL("/auth/confirm?next=/auth/reset-password", site.url).href });
+      const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: new URL("/auth/confirm?next=/auth/reset-password", request.url).href });
       if (error && error.status && error.status >= 500) return go("/auth/error");
       return go("/auth/check-email");
     }

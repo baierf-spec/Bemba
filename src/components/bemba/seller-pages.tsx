@@ -285,18 +285,19 @@ export function SellerOverview() {
             <h3>Quick actions</h3>
             <ul className="tip-list">
               <li>
-                <Plus />
-                <Link href="/demo/dashboard/products/new">Add a product</Link>
-              </li>
-              <li>
-                <Store />
-                <Link href="/demo/dashboard/storefront">
-                  Customize storefront
+                <Link href="/demo/dashboard/products/new">
+                  <Plus /> Add a product
                 </Link>
               </li>
               <li>
-                <Sparkles />
-                <Link href="/demo/dashboard/ai">Explore AI tools</Link>
+                <Link href="/demo/dashboard/storefront">
+                  <Store /> Customize storefront
+                </Link>
+              </li>
+              <li>
+                <Link href="/demo/dashboard/ai">
+                  <Sparkles /> Explore AI tools
+                </Link>
               </li>
             </ul>
           </div>
@@ -370,7 +371,7 @@ export function ManageProducts() {
               <p className="p-5">No matching sample products.</p>
             )}
           </div>
-          <p className="text-[10px] text-muted-foreground">
+          <p className="text-xs text-muted-foreground mt-2">
             Showing {products.length} sample products. *Stock quantities are
             examples.
           </p>
@@ -654,7 +655,7 @@ export function Analytics() {
           <div className="panel">
             <div className="panel-header">
               <h2>Store views over time</h2>
-              <span className="text-[10px] text-muted-foreground">
+              <span className="text-xs font-semibold px-2.5 py-1 rounded bg-[#edf3e5] text-[#2c593c]">
                 {period}
               </span>
             </div>

@@ -21,9 +21,26 @@ export function SiteHeader() {
           onClick={() => setOpen(false)}
         >
           <Link href="/demo/marketplace">Discover</Link>
-          <Link href="/#for-sellers">For Sellers</Link>
           <Link href="/pricing">Pricing</Link>
-          <Link href="/#about">About</Link>
+          {seller ? (
+            <>
+              <Link href="/demo/dashboard">Seller Hub</Link>
+              <Link href="/demo/dashboard/products" className="mobile-only-link">
+                Products
+              </Link>
+              <Link href="/demo/dashboard/storefront" className="mobile-only-link">
+                Storefront
+              </Link>
+              <Link href="/demo/store" className="mobile-only-link">
+                View live store ↗
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link href="/#for-sellers">For Sellers</Link>
+              <Link href="/#about">About</Link>
+            </>
+          )}
         </nav>
         <div className="header-actions">
           {seller ? (
@@ -31,9 +48,13 @@ export function SiteHeader() {
               <Link href="/demo/store" className="header-store">
                 View store <ArrowUpRight size={14} />
               </Link>
-              <Link className="account-chip" href="/dashboard/settings">
+              <Link
+                className="account-chip"
+                href="/dashboard/settings"
+                aria-label="Seller account settings"
+              >
                 <span>CF</span>
-                <span>
+                <span className="account-text">
                   Seller account<small>Manage your business</small>
                 </span>
               </Link>

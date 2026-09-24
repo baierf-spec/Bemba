@@ -1,0 +1,6 @@
+{
+  "name": "Bemba",
+  "description": "Branded storefronts for Zambian businesses. Discover products and contact sellers directly on WhatsApp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
